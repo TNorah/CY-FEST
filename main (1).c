@@ -103,11 +103,17 @@ void modeManager(){
                 exit(3);   
             }
             
-            for(int k=0; k<(salle[i].rangées[j].nbSièges); k++){ // Initialise les sièges et définie une catégorie
+            char c; // donne la catégorie de chaque rangée
+            if(rA > j){
+                c = 'A';
+            }else if((rA+rB) > j){
+                c = 'B';
+            }else if(salle[i].nbRangées > j){
+                c = 'C';
+            }
             
-                printf("Quel catégorie de prix pour le siège n°%d de la rangee n°%d ?\n", k+1,j+1);
-                scanf(" %c",&salle[i].rangées[j].sièges[k].catégorie);
-                
+            for(int k=0; k<(salle[i].rangées[j].nbSièges); k++){ // Initialise les sièges et définie une catégorie
+                salle[i].rangées[j].sièges[k].catégorie = c;
                 salle[i].rangées[j].sièges[k].réservé = 0; // NON RESERVE 
             }
         }
