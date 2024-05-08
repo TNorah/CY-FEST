@@ -23,16 +23,6 @@ typedef struct{
 }Rangée;
 
 typedef struct{
-    
-    char nom[MAX];
-    int nbRangées;
-    int actif;
-    Rangée *rangées;
-    Concert concert;
-    
-}Salle;
-
-typedef struct{
     int heure;
     int min;
 }Heure;
@@ -55,6 +45,16 @@ typedef struct{
     int fosse; // déterminer par l'utilisateur
     
 }Concert;
+
+typedef struct{
+    
+    char nom[MAX];
+    int nbRangées;
+    int actif;
+    Rangée *rangées;
+    Concert concert;
+    
+}Salle;
 
 void ecrireSalle(Salle *tab, int N){
     
