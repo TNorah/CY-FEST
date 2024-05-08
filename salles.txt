@@ -1,0 +1,3 @@
+Nom : Salle1, nbRangées : 3, Actif : 0
+Nom : Salle2, nbRangées : 2, Actif : 0
+Nom : Salle3, nbRangées : 4, Actif : 0
