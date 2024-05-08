@@ -69,7 +69,7 @@ void ecrireSalle(Salle *tab, int N){
         fprintf(fichier,"Nom : %s, nbRangées : %d, Actif : %d, \n",tab[i].nom,tab[i].nbRangées,tab[i].actif);
     }
 }
-
+/*
 void lireSalle(int *nbF){
 
     FILE* fichier = fopen(FICHIER_SALLES,"r");
@@ -93,7 +93,7 @@ void lireSalle(int *nbF){
         //fscanf(fichier, "Nom : %s, nbRangées : %d, Actif : %d\n", tab[i].nom, tab[i].prenom, &tab[i].age);
     }
 }
-
+*/
 int rechercheSalle(Salle *salle, char *Nom, int nbTotal){ 
     
     // recherche dans le tableau de salles si une salle existe
