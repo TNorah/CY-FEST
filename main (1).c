@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #define couleur(param) printf("\033[%sm",param)
-#define MAX 20
+#define MAX 30
 
 #define FICHIER_SALLES "salles.txt"
 #define FICHIER_CONCERTS "concerts.txt"
@@ -23,13 +23,9 @@ typedef struct{
 }Rangée;
 
 typedef struct{
+    
     int heure;
     int min;
-}Heure;
-
-typedef struct{
-    
-    Heure heure;
     int jour;
     int mois;
     int année;
@@ -50,11 +46,26 @@ typedef struct{
     
     char nom[MAX];
     int nbRangées;
-    int actif;
+    int etat; //initialiser à zero
     Rangée *rangées;
-    Concert concert;
+    Concert concert; //initialiser à zero
     
 }Salle;
+
+int testSiFichierVide(FILE *fichier)
+{
+    int caracterePremier = 0;
+ 
+    //On lit le prmeier caractère du fichier
+    caracterePremier = fgetc(fichier);
+    if(caracterePremier == EOF)
+    {
+        return 1; //le fichier est vide donc on retourne 1
+    }
+    return 0; //le fichier n'est pas vide donc on retourne 0
+    
+    rewind(fichier);
+}
 
 void ecrireSalle(Salle *tab, int N){
     
@@ -66,34 +77,60 @@ void ecrireSalle(Salle *tab, int N){
     }
     
     for(int i=0; i<N; i++){
-        fprintf(fichier,"Nom : %s, nbRangées : %d, Actif : %d, \n",tab[i].nom,tab[i].nbRangées,tab[i].actif);
+        fprintf(fichier,"%s %d %d %s\n",tab[i].nom,tab[i].nbRangées,tab[i].etat,tab[i].concert.nom);
     }
+    
+    fclose(fichier);
 }
-/*
-void lireSalle(int *nbF){
 
-    FILE* fichier = fopen(FICHIER_SALLES,"r");
+Salle *lireSalle(int *nbS){
+
+    FILE *fichier = fopen(FICHIER_SALLES,"r");
     
     if(fichier == NULL){
-        printf("ERREUR LORS DE L'OUVERTURE DU FICHIER POUR LECTURE\n");
-        exit(6);
+        printf("Erreur d'ouverture en mode lecture!\n");
+        fclose(fichier);
+        exit(99);
     }
     
-    *nbF = 0;
+    if(testSiFichierVide(fichier) == 1){
+        printf("Fichier vide !\n");
+        fclose(fichier);
+        return NULL;
+    }
+    
+    *nbS = 0;
     char c;
     
-    while((c = fgets(fichier)) != EOF){
+    while((c = fgetc(fichier)) != EOF){
         if(c == '\n'){
-            nbF++;
+            (*nbS)++;
         }
     }
     rewind(fichier);
     
-    for(int i=0; i<*nbF; i++){
-        //fscanf(fichier, "Nom : %s, nbRangées : %d, Actif : %d\n", tab[i].nom, tab[i].prenom, &tab[i].age);
+    printf("nbS = %d\n",*nbS);
+    
+    Salle *salle = malloc((*nbS) * sizeof(Salle));
+    
+    if(salle == NULL){
+        printf("Problème d'allocation -- LireSalle --\n");
+        exit(9);
     }
+    
+    for(int i=0; i<*nbS; i++){
+        fscanf(fichier,"%s %d %d %s\n",salle[i].nom,&salle[i].nbRangées,&salle[i].etat,salle[i].concert.nom);
+    }
+    
+    for(int i=0; i<*nbS; i++){
+        printf("Nom : %s, nbRangees : %d, Etat : %d, Concert : %s\n",salle[i].nom,salle[i].nbRangées,salle[i].etat,salle[i].concert.nom);
+    }
+    
+    fclose(fichier);
+    
+    return salle;
 }
-*/
+
 int rechercheSalle(Salle *salle, char *Nom, int nbTotal){ 
     
     // recherche dans le tableau de salles si une salle existe
@@ -124,9 +161,9 @@ void afficheSalle(Salle *salle, int nb){
     
     // en fonction de la salle à afficher
     
-    printf("Numéro de la salle %s est %d\n",salle[indice].nom,indice+1);
+    printf("Numero de la salle %s est %d\n",salle[indice].nom,indice+1);
         
-    for(int j=0; j<(salle[indice].nbRangées); j++){
+    /*for(int j=0; j<(salle[indice].nbRangées); j++){
             
         for(int k=0; k<(salle[indice].rangées[j].nbSièges); k++){
                 
@@ -139,15 +176,20 @@ void afficheSalle(Salle *salle, int nb){
             }
         }
         printf("\n");
-    }
+    }*/
 }
 
-Salle* créerSalle(int nB){
+Salle* créerSalle(int *nb){
     
     int rA, rB; 
     int rC;
     
+    int nB;
+    
     Salle *tab = NULL;
+    
+    printf("Combien de salles ?\n");
+    scanf("%d",&nB);
     
     tab = malloc(nB * sizeof(Salle));
     
@@ -158,11 +200,33 @@ Salle* créerSalle(int nB){
     
     for(int i=0; i<nB; i++){ // Crée une salle
     
-        printf("Nom de la salle n°%d ?\n", i+1);
+        printf("Nom de la salle n.%d ?\n", i+1);
         scanf("%s",tab[i].nom);
         
         printf("Combien de rangees ?\n");
         scanf("%d",&tab[i].nbRangées);
+        
+        char source[] = "Non";
+
+        strcpy(tab[i].concert.nom, source);
+        printf("Contenu de tab nom : %s\n", tab[i].concert.nom); 
+        
+        strcpy(tab[i].concert.artiste, source);
+        printf("Contenu de tab artiste : %s\n", tab[i].concert.artiste); 
+        
+        tab[i].concert.dateDebut.heure = 0;
+        tab[i].concert.dateDebut.min = 0;
+        tab[i].concert.dateDebut.jour = 0;
+        tab[i].concert.dateDebut.mois = 0;
+        tab[i].concert.dateDebut.année = 0;
+        
+        tab[i].concert.dateFin.heure = 0;
+        tab[i].concert.dateFin.min = 0;
+        tab[i].concert.dateFin.jour = 0;
+        tab[i].concert.dateFin.mois = 0;
+        tab[i].concert.dateFin.année = 0;
+        
+        tab[i].concert.fosse = 0;
         
         tab[i].rangées = malloc(tab[i].nbRangées * sizeof(*tab[i].rangées));
         
@@ -172,10 +236,10 @@ Salle* créerSalle(int nB){
         }
         
         // demande les rangées en catégorie A et B pour trouver ceux de la C
-        printf("Combien de rangées pour la catégorie A ?\n");
+        printf("Combien de rangees pour la categorie A ?\n");
         scanf("%d",&rA);
         
-        printf("Combien de rangées pour la catégorie B ?\n");
+        printf("Combien de rangees pour la categorie B ?\n");
         scanf("%d",&rB);
         
         rC = tab[i].nbRangées - (rA + rB);
@@ -188,7 +252,7 @@ Salle* créerSalle(int nB){
         
         for(int j=0; j<(tab[i].nbRangées); j++){ // Crée les rangées de sièges
             
-            printf("Combien de sièges pour la rangee n°%d ?\n", j+1);
+            printf("Combien de sieges pour la rangee n°%d ?\n", j+1);
             scanf("%d",&tab[i].rangées[j].nbSièges);
             
             tab[i].rangées[j].sièges = malloc(tab[i].rangées[j].nbSièges * sizeof(*tab[i].rangées[j].sièges));
@@ -215,8 +279,9 @@ Salle* créerSalle(int nB){
     }
     
     ecrireSalle(tab, nB);
+    *nb = nB;
 
-    printf("||Creation de salle(s) terminée||\n");
+    printf("||Creation de salle(s) terminee||\n");
     
     return tab;
 }
@@ -232,7 +297,7 @@ Salle* ajouterSalle(Salle *tab, int N_tab, int *T_p){
     
     //ajoute une ou plusieurs salles lorsque le tableau est non vide
 
-    printf("Combien de salles à ajouter ?\n");
+    printf("Combien de salles a ajouter ?\n");
     scanf("%d",&N_tabAjouter);
     
     int total = (N_tab+N_tabAjouter);
@@ -246,7 +311,7 @@ Salle* ajouterSalle(Salle *tab, int N_tab, int *T_p){
     
     for(int i=N_tab; i<total; i++){
         
-        printf("Nom de la salle n°%d ?\n", i+1);
+        printf("Nom de la salle n.%d ?\n", i+1);
         scanf("%s",tab1[i].nom);
         
         printf("Combien de rangees ?\n");
@@ -259,10 +324,10 @@ Salle* ajouterSalle(Salle *tab, int N_tab, int *T_p){
             exit(2);
         }
         
-        printf("Combien de rangées pour la catégorie A ?\n");
+        printf("Combien de rangees pour la categorie A ?\n");
         scanf("%d",&rA);
         
-        printf("Combien de rangées pour la catégorie B ?\n");
+        printf("Combien de rangees pour la categorie B ?\n");
         scanf("%d",&rB);
         
         rC = tab1[i].nbRangées - (rA + rB);
@@ -274,7 +339,7 @@ Salle* ajouterSalle(Salle *tab, int N_tab, int *T_p){
         
         for(int j=0; j<(tab1[i].nbRangées); j++){ // Crée les rangées de sièges
             
-            printf("Combien de sièges pour la rangee n°%d ?\n", j+1);
+            printf("Combien de sieges pour la rangee n.%d ?\n", j+1);
             scanf("%d",&tab1[i].rangées[j].nbSièges);
             
             tab1[i].rangées[j].sièges = malloc(tab1[i].rangées[j].nbSièges * sizeof(*tab1[i].rangées[j].sièges));
@@ -300,8 +365,11 @@ Salle* ajouterSalle(Salle *tab, int N_tab, int *T_p){
         }
     }
     
+    ecrireSalle(tab1, total);
+    
+    printf("|| Ajout salle fini ||\n");
+    
     *T_p = total;
-    printf("Fini!\n");
     return tab1;
     
 }
@@ -313,9 +381,14 @@ Salle* modifierSalle(Salle *tab, int N){
     int rA, rB;
     int rC;
     
+    if(tab == NULL){
+        printf("Le tableau de salles est vide -- modifierSalle --\n");
+        return NULL;
+    }
+    
     // affiche nom des salles
     for(int i=0; i<N; i++){
-        printf("Salle n°%d : %s\n",i+1,tab[i].nom);
+        printf("Salle n.%d : %s\n",i+1,tab[i].nom);
     }
     
     // récupérer le nom pour vérifier et prendre l'indice de la salle
@@ -327,7 +400,7 @@ Salle* modifierSalle(Salle *tab, int N){
     
     //modifie la salle
 
-    printf("Nom de la salle n°%d à modifier ?\n", indice+1);
+    printf("Nom de la salle n.%d a modifier ?\n", indice+1);
     scanf("%s",tab[indice].nom);
         
     printf("Combien de rangees ?\n");
@@ -343,7 +416,7 @@ Salle* modifierSalle(Salle *tab, int N){
     printf("Combien de rangées pour la catégorie A ?\n");
     scanf("%d",&rA);
         
-    printf("Combien de rangées pour la catégorie B ?\n");
+    printf("Combien de rangees pour la categorie B ?\n");
     scanf("%d",&rB);
         
     rC = tab[indice].nbRangées - (rA + rB);
@@ -355,7 +428,7 @@ Salle* modifierSalle(Salle *tab, int N){
         
     for(int j=0; j<(tab[indice].nbRangées); j++){ // Crée les rangées de sièges
             
-        printf("Combien de sièges pour la rangee n°%d ?\n", j+1);
+        printf("Combien de sieges pour la rangee n°%d ?\n", j+1);
         scanf("%d",&tab[indice].rangées[j].nbSièges);
             
         tab[indice].rangées[j].sièges = malloc(tab[indice].rangées[j].nbSièges * sizeof(*tab[indice].rangées[j].sièges));
@@ -380,12 +453,14 @@ Salle* modifierSalle(Salle *tab, int N){
         }
     }
     
+    ecrireSalle(tab, N);
+    
     printf("|| Modification de la salle fini ! ||\n\n");
     
     return tab;
 }
 
-Salle* modeManager(int *nb){
+Salle* modeManager(Salle *salle,int *nb){
     
     // Doit créer une ou plusieurs salles (X)
     // choisit le nombre de sièges et nombre de rangées par catégorie (A et B) (X)
@@ -396,7 +471,6 @@ Salle* modeManager(int *nb){
     // Si un concert est terminé, il peut remodifier une salle
     // Il peut consulter l'état une salle (en concert, concert terminé, etc.)
     
-    Salle *salle = NULL;
     int nB;
     int choix;
     
@@ -404,39 +478,34 @@ Salle* modeManager(int *nb){
     
     do{
         printf("Que voulez-vous faire ?\n\n");
-        printf("1- Créer une ou plusieurs salles \n");
+        printf("1- Creer une ou plusieurs salles \n");
         printf("2- Modifier une salle \n");
-        printf("3- Attribuer une salle à un concert \n");
+        printf("3- Attribuer une salle a un concert \n");
         printf("4- Quitter\n");
         
         scanf("%d",&choix);
         
         switch(choix){
             case 1:
-                
                 if(salle == NULL){
-                    
-                    printf("Combien de salles ?\n");
-                    scanf("%d",&nB);
-                
-                    *nb = nB;
-                    
                     printf("Salle vide !\n");
-                    salle = créerSalle(*nb);
+                    salle = créerSalle(nb);
                 }else{
                     printf("Salle non vide !\n");
+                    nB = *nb;
                     salle = ajouterSalle(salle,nB,nb);
                     printf("nb = %d\n",*nb);
                 }
-                
                 break;
             
             case 2:
                 salle = modifierSalle(salle, *nb);
                 afficheSalle(salle, *nb);
+                break;
                 
             case 4:
                 printf("bye bye !\n");
+                break;
                 
             default :
                 printf("Mauvaise commande !\n");
@@ -447,7 +516,7 @@ Salle* modeManager(int *nb){
     return salle;
 }
 
-void modeFestivalier(){
+void modeFestivalier(Salle *salle, int nbSalles){
     
     printf("||MODE FESTIVALIER||\n");
 
@@ -455,26 +524,33 @@ void modeFestivalier(){
     // Peut réserver un ou plusieurs sièges
     // Affiche le plan de la salle que l'utilisateur souhaite réserver (donner une légende)
 
-    printf("\n||Légende||\n");
-    printf("   0   : siège libre\n");
-    printf("   X   : siège occupé\n");
-    printf("  Vert : catégorie A\n");
-    printf(" Orange : catégorie B\n");
-    printf(" Marron : catégorie C\n");
+    afficheSalle(salle,nbSalles);
+
+    printf("\n||Legende||\n");
+    printf("   0   : siege libre\n");
+    printf("   X   : siege occupé\n");
+    printf("  Vert : categorie A\n");
+    printf(" Orange : categorie B\n");
+    printf(" Marron : categorie C\n");
     
 }
 
 int main(){
     
-    FILE *fichier;
-    Salle *salles;
+    Salle *salles = NULL;
     
     int choix = 99;
-    int nbSalles;
+    int nbSalles = 0;
 
     printf("-------------\n");
     printf("|| CY-FEST ||\n");
     printf("-------------\n");
+    
+    // Récupérer les salles du fichier SALLES.TXT
+    // Si vide => return NULL et nbSalles = 0, sinon return salle et nbSalles récupérer
+    
+    salles = lireSalle(&nbSalles);
+    printf("nbSalles = %d",nbSalles);
     
     do{
         
@@ -486,14 +562,11 @@ int main(){
         switch(choix){
         
             case 1:
-                salles = modeManager(&nbSalles);
-                afficheSalle(salles,nbSalles);
-                
+                salles = modeManager(salles,&nbSalles);
                 printf("nbSalles = %d\n",nbSalles);
-                
                 break;
             case 2:
-                modeFestivalier();
+                modeFestivalier(salles,nbSalles);
                 break;
             case 3:
                 printf("|| Fin du programme ||\n");
@@ -504,10 +577,10 @@ int main(){
                 break;
             default :
                 printf("Cette commande n'existe pas ! Recommencez\n\n");
+                break;
         }
         
     }while(choix != 3);  
  
     return 0;
 }
-
