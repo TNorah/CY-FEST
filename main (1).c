@@ -622,11 +622,6 @@ Salle* modifierSalle(Salle *tab, int N){
     return tab;
 }
 
-/*Concert *modifierConcert(concert,text){
-    printf("|| Modification Concert ||\n");
-    return concert;
-}*/
-
 Salle *attribuerConcert(Salle *salles, int nbs, Concert *concerts, int nbc){
 
 	char s[MAX];
@@ -688,7 +683,7 @@ Salle *attribuerConcert(Salle *salles, int nbs, Concert *concerts, int nbc){
 	
 	// ecrire ca dans les fichiers respectifs....
 	salles[indiceS].état = 1;
-	salles[indiceS].concerts[indiceC].état = 1;
+	//salles[indiceS].concert[indiceC].état = 1;
 	concerts[indiceC].état = 1;
 	
 	ecrireSalle(salles,nbs);
@@ -704,6 +699,45 @@ Salle *attribuerConcert(Salle *salles, int nbs, Concert *concerts, int nbc){
 
 	return salles;
 }
+
+Concert *modifierConcert(Concert *concert, int nbC){
+    
+    char text[MAX];
+    
+    printf("|| Modification Concert ||\n");
+    
+    if(concert == NULL){
+    	printf("ERREUR : Concert vide !\n");
+    	return NULL; 
+    }
+    	
+    printf("Quel concert modifier ?\n");
+    scanf("%s",text);
+    
+    int indice = rechercheConcert(concert, text, nbC);
+    
+    if(indice < 0){
+    	printf("ERREUR : Ce concert n'existe pas !\n");
+    	return concert;
+    }
+    
+    if(strlen(text) > MAX){
+    	printf("ERREUR : trop de caractères !");
+    	exit(2);
+    }
+    
+    printf("Donnez la date de fin : (ex : 12h55 13/5/2024)\n");
+    scanf("%dh%d %d/%d/%d",&concert[indice].dateFin.heure,&concert[indice].dateFin.min,&concert[indice].dateFin.jour,
+    &concert[indice].dateFin.mois,&concert[indice].dateFin.année);
+    
+    // tester avec des valeurs mauvaises
+    
+    printf("%dh%d %d/%d/%d",concert[indice].dateFin.heure,concert[indice].dateFin.min,concert[indice].dateFin.jour,
+    concert[indice].dateFin.mois,concert[indice].dateFin.année);
+    
+    return concert;
+}
+
 
 Salle* modeManager(Salle *salle, Concert *concert, int *nb, int *nbC){
     
@@ -743,7 +777,7 @@ Salle* modeManager(Salle *salle, Concert *concert, int *nb, int *nbC){
                 afficheSalle(salle, *nb);
                 break;
             case 3:
-                //concert = modifierConcert(concert);
+                concert = modifierConcert(concert,*nbC);
                 break;
             case 4:
                 printf("|| Attribuer un concert à une salle ||\n");
