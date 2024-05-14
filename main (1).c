@@ -97,7 +97,7 @@ int testSiFichierVide(FILE *fichier)
    
 }
 
-void ecrireSalle(Salle *tab, int N){
+void ecrireSalle(Salle *tabS, int Ns){
     
     FILE* fichier = fopen(FICHIER_SALLES,"w");
     
@@ -106,8 +106,27 @@ void ecrireSalle(Salle *tab, int N){
         exit(5);
     }
     
-    for(int i=0; i<N; i++){
-        fprintf(fichier,"%s %d %d %s\n",tab[i].nom,tab[i].nbRangées,tab[i].état,tab[i].concert.nom);
+    for(int i=0; i<Ns; i++){
+        fprintf(fichier,"%s %d %d %s\n",tabS[i].nom,tabS[i].nbRangées,tabS[i].état,tabS[i].concert.nom);
+    }
+    
+    fclose(fichier);
+}
+
+void ecrireConcert(Concert *tabC, int Nc){
+    
+    FILE* fichier = fopen(FICHIER_CONCERTS,"w");
+    
+    if(fichier == NULL){
+        printf("ERREUR LORS DE L'OUVERTURE DU FICHIER POUR ECRIRE\n");
+        exit(5);
+    }
+    
+    for(int i=0; i<Nc; i++){
+        fprintf(fichier,"%s %s %dh%d |%d/%d/%d| %dh%d |%d/%d/%d| %d %d\n",tabC[i].nom,tabC[i].artiste,
+        tabC[i].dateDebut.heure,tabC[i].dateDebut.min,tabC[i].dateDebut.jour,tabC[i].dateDebut.mois,
+        tabC[i].dateDebut.année,tabC[i].dateFin.heure,tabC[i].dateFin.min,tabC[i].dateFin.jour,
+        tabC[i].dateFin.mois,tabC[i].dateFin.année,tabC[i].fosse, tabC[i].état);
     }
     
     fclose(fichier);
@@ -149,17 +168,17 @@ Concert *lireConcert(int *nbC){
     }
     
     for(int i=0; i<*nbC; i++){
-        fscanf(fichier,"%s %s %dh%d |%d/%d/%d| |%d/%d/%d| %d\n",concert[i].nom,concert[i].artiste,
+        fscanf(fichier,"%s %s %dh%d |%d/%d/%d| %dh%d |%d/%d/%d| %d %d\n",concert[i].nom,concert[i].artiste,
         &concert[i].dateDebut.heure,&concert[i].dateDebut.min,&concert[i].dateDebut.jour,&concert[i].dateDebut.mois,
-        &concert[i].dateDebut.année,&concert[i].dateFin.jour,&concert[i].dateFin.mois,&concert[i].dateFin.année,
-        &concert[i].fosse);
+        &concert[i].dateDebut.année,&concert[i].dateFin.heure,&concert[i].dateFin.min,&concert[i].dateFin.jour,
+        &concert[i].dateFin.mois,&concert[i].dateFin.année,&concert[i].fosse,&concert[i].état);
     }
     
     for(int i=0; i<*nbC; i++){
-        printf("Nom : %s, Artiste : %s, Début : %dh%d |%d/%d/%d|, Fin : |%d/%d/%d|%d\n",concert[i].nom,concert[i].artiste,
-        concert[i].dateDebut.heure,concert[i].dateDebut.min,concert[i].dateDebut.jour,concert[i].dateDebut.mois,
-        concert[i].dateDebut.année,concert[i].dateFin.jour,concert[i].dateFin.mois,concert[i].dateFin.année,
-        concert[i].fosse);
+        printf("Nom : %s, Artiste : %s, Début : %dh%d |%d/%d/%d|, Fin : %dh%d |%d/%d/%d| fosse : %d, état = %d\n",
+        concert[i].nom,concert[i].artiste,concert[i].dateDebut.heure,concert[i].dateDebut.min,concert[i].dateDebut.jour,
+        concert[i].dateDebut.mois,concert[i].dateDebut.année,concert[i].dateFin.heure,concert[i].dateFin.min,
+        concert[i].dateFin.jour,concert[i].dateFin.mois,concert[i].dateFin.année,concert[i].fosse,concert[i].état);
     }
     
     fclose(fichier);
@@ -364,6 +383,7 @@ Salle* créerSalle(int *nb){
         
         strcpy(tab[i].concert.artiste, source);
         printf("Contenu de tab artiste : %s\n", tab[i].concert.artiste); 
+        
         tab[i].concert.dateDebut.heure = 0;
         tab[i].concert.dateDebut.min = 0;
         tab[i].concert.dateDebut.jour = 0;
@@ -440,7 +460,7 @@ Salle* créerSalle(int *nb){
 Salle* ajouterSalle(Salle *tab, int N_tab, int *T_p){ 
     
     Salle *tab1 = NULL; // nouveau tableau où vont être mis les salles du premier tableau et les nouvelles salles
-    int N_tabAjouter; 
+    int NtabAjouter; 
     
     int rA, rB;
     int rC;
@@ -448,9 +468,9 @@ Salle* ajouterSalle(Salle *tab, int N_tab, int *T_p){
     //ajoute une ou plusieurs salles lorsque le tableau est non vide
 
     printf("Combien de salles a ajouter ?\n");
-    scanf("%d",&N_tabAjouter);
+    scanf("%d",&NtabAjouter);
     
-    int total = (N_tab+N_tabAjouter);
+    int total = (N_tab+NtabAjouter);
     
     tab1 = realloc(tab, total * sizeof(Salle));
     
@@ -687,7 +707,7 @@ Salle *attribuerConcert(Salle *salles, int nbs, Concert *concerts, int nbc){
 	concerts[indiceC].état = 1;
 	
 	ecrireSalle(salles,nbs);
-	//ecrireConcert(concerts,nbc);
+	ecrireConcert(concerts,nbc);
 	
 	printf("nom = %s\n",salles[indiceS].concert.nom);
 	printf("artiste = %s\n",salles[indiceS].concert.artiste);
@@ -726,14 +746,21 @@ Concert *modifierConcert(Concert *concert, int nbC){
     	exit(2);
     }
     
+    printf("Avant\n");
+    printf("%dh%d %d/%d/%d",concert[indice].dateFin.heure,concert[indice].dateFin.min,concert[indice].dateFin.jour,
+    concert[indice].dateFin.mois,concert[indice].dateFin.année);
+    
+    
     printf("Donnez la date de fin : (ex : 12h55 13/5/2024)\n");
     scanf("%dh%d %d/%d/%d",&concert[indice].dateFin.heure,&concert[indice].dateFin.min,&concert[indice].dateFin.jour,
     &concert[indice].dateFin.mois,&concert[indice].dateFin.année);
     
     // tester avec des valeurs mauvaises
-    
+    printf("Avant\n");
     printf("%dh%d %d/%d/%d",concert[indice].dateFin.heure,concert[indice].dateFin.min,concert[indice].dateFin.jour,
     concert[indice].dateFin.mois,concert[indice].dateFin.année);
+    
+    ecrireConcert(concert,nbC);
     
     return concert;
 }
