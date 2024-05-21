@@ -1,4 +1,4 @@
-Concert1 Queen 12h20 |4/6/2024| 0h0 |0/0/0| 0 0
-Concert2 Nirvana 13h10 |4/6/2024| 0h0 |0/0/0| 0 0
-Concert3 TheBeatles 15h15 |4/6/2024| 0h0 |0/0/0| 0 0
-Concert4 Radiohead 18h30 |4/6/2024| 0h0 |0/0/0| 0 0
+Concert1 Queen 12h50 |22/5/2024| 23h0 |23/5/2024| 0 1
+Concert2 Nirvana 13h10 |20/5/2024| 20h30 |22/5/2024| 0 1
+Concert3 TheBeatles 15h15 |21/5/2024| 20h10 |21/5/2024| 1 1
+Concert4 Radiohead 18h30 |21/5/2024| 0h0 |0/0/0| 0 0
