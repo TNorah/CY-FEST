@@ -1050,10 +1050,14 @@ Salle* modeFestivalier(Salle *salle, Concert *concert, int *nbS, int *nbC){
     for(int indiceS=0; indiceS<*nbS; indiceS++){
         
         indiceC = rechercheConcert(concert,salle[indiceS].concert.nom,*nbC);
+        
         DebutC = conversionDateSecondesD(concert, indiceC);
         FinC = conversionDateSecondesF(concert, indiceC);
         
-        if(current < DebutC){
+        if(indiceC < 0){
+            printf("Salle : %s n'a pas de concert d'attribuée\n",salle[indiceS].nom);
+            
+        }else if(current < DebutC){
             printf("Salle : %s , Statut : concert %s prevu\n",salle[indiceS].nom,salle[indiceS].concert.nom);
         }else if(current > DebutC && current < FinC){
             printf("Salle : %s , Statut : concert %s en cours\n",salle[indiceS].nom,salle[indiceS].concert.nom);
