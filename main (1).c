@@ -703,10 +703,10 @@ Salle* modifierSalle(Salle *tab, Concert *c, int N, int nC){
     char textC[MAX];
     
     printf("Quelle salle voulez-vous modifier ?\n");
-    scanf("%s",textS);
+    scanf("%s",textS); //
     
     printf("Quel concert voulez-vous modifier ?\n");
-    scanf("%s",textC);
+    scanf("%s",textC); //
     
     indiceS = rechercheSalle(tab, textS, N);
     indiceC = rechercheConcert(c, textC, N);
@@ -735,45 +735,45 @@ Salle* modifierSalle(Salle *tab, Concert *c, int N, int nC){
     //modifie la salle
 
     printf("Nom de la salle n.%d a modifier ?\n", indiceS+1);
-    scanf("%s",tab[indiceS].nom);
+    scanf("%s",tab[indiceS].nom); //
     
     if(strlen(tab[indiceS].nom) > MAX){
     	printf("ERREUR : trop de caracteres !\n"); 
     	free(tab[indiceS].nom);
-    	return tab;
+    	exit(EXIT_FAILURE);
     }
         
     printf("Combien de rangees ?\n");
-    scanf("%d",&tab[indiceS].nbRangées);
+    scanf("%d",&tab[indiceS].nbRangées); //
         
     tab[indiceS].rangées = malloc(tab[indiceS].nbRangées * sizeof(*tab[indiceS].rangées));
         
     if(tab[indiceS].rangées == NULL){
-        exit(2);
+        exit(EXIT_FAILURE);
     }
         
     printf("Combien de rangees pour la categorie A ?\n");
-    scanf("%d",&rA);
+    scanf("%d",&rA); //
         
     printf("Combien de rangees pour la categorie B ?\n");
-    scanf("%d",&rB);
+    scanf("%d",&rB); //
         
     rC = tab[indiceS].nbRangées - (rA + rB);
         
     if(rC < 0){
         printf("WRONG INPUT!\n");
-        exit(3);
+        exit(EXIT_FAILURE);
     }
         
     for(int j=0; j<(tab[indiceS].nbRangées); j++){ // Crée les rangées de sièges
             
         printf("Combien de sieges pour la rangee n°%d ?\n", j+1);
-        scanf("%d",&tab[indiceS].rangées[j].nbSièges);
+        scanf("%d",&tab[indiceS].rangées[j].nbSièges); //
             
         tab[indiceS].rangées[j].sièges = malloc(tab[indiceS].rangées[j].nbSièges * sizeof(*tab[indiceS].rangées[j].sièges));
             
         if(tab[indiceS].rangées[j].sièges == NULL){
-            exit(4);   
+            exit(EXIT_FAILURE);  
         }
             
         char c; // donne la catégorie de chaque rangée
@@ -806,11 +806,11 @@ Salle *attribuerConcert(Salle *salles, int nbs, Concert *concerts, int nbc){
 	concerts = lireConcert(&nbc);
 
 	printf("quel salle attribue ?\n");
-	scanf("%s",s);
+	scanf("%s",s); //
 	
 	if(strlen(s) >= MAX){
 		printf("ERREUR FATALE: trop de caracteres --attribuerConcert--\n");
-		exit(8);
+		exit(EXIT_FAILURE);
 	}
 	
 	int indiceS = rechercheSalle(salles,s,nbs);
@@ -826,11 +826,11 @@ Salle *attribuerConcert(Salle *salles, int nbs, Concert *concerts, int nbc){
 	}
 	
 	printf("quel concert attribue ?\n");
-	scanf("%s",c);
+	scanf("%s",c); //
 	
 	if(strlen(c) >= MAX){
 		printf("ERREUR : trop de caractères --attribuerConcert--\n");
-		exit(8);
+		exit(EXIT_FAILURE);
 	}
 	
 	int indiceC = rechercheConcert(concerts,c,nbc);
@@ -886,7 +886,7 @@ Concert *modifierConcert(Concert *concert, int nbC){
     }
     	
     printf("Quel concert modifier ?\n");
-    scanf("%s",text);
+    scanf("%s",text); //
     
     int indice = rechercheConcert(concert, text, nbC);
     
@@ -895,9 +895,9 @@ Concert *modifierConcert(Concert *concert, int nbC){
     	return concert;
     }
     
-    if(strlen(text) >= MAX){
+    if(strlen(text) >= MAX){ //
     	printf("ERREUR : trop de caractères !");
-    	exit(2);
+    	exit(EXIT_FAILURE);
     }
     
     long current = time(NULL);
@@ -932,7 +932,7 @@ Concert *modifierConcert(Concert *concert, int nbC){
     
     if(FinC < DebutC){
     	printf("Date invalide ! :(\n");
-    	exit(999);
+	    exit(EXIT_FAILURE);
     }
     
     // tester avec des valeurs mauvaises
@@ -1015,14 +1015,14 @@ void modeFestivalier(Salle *salle, int nbSalles){
     
     do{
         printf("||MODE FESTIVALIER||\n\n");
-        choix = scanfD("1- AFFICHER UNE OU PLUSIEURS SALLES\n2- MODIFIER LES PRIX DES CATEGORIES\n3- RETOUR AU MENU\n\n",1);
+        choix = scanfD("1- AFFICHER UNE OU PLUSIEURS SALLES\n2- RESERVER DES PLACES\n3- RETOUR AU MENU\n\n",1);
         
         switch(choix){
             case 1 :
                 afficheSalle(salle,nbSalles);
                 break;
             case 2: 
-                printf("choix 2\n");
+                printf("|| Reservation de places ||\n");
                 break;
             case 3:
                 printf("|| Retour au menu ||\n");
@@ -1044,7 +1044,7 @@ int main(){
     int nbSalles = 0;
     int nbConcerts = 0;
     
-    printf("-------------\n");
+    printf("_____________\n");
     printf("|| CY-FEST ||\n");
     printf("-------------\n");
     
@@ -1059,7 +1059,6 @@ int main(){
     do{
         
         printf("\n--MENU--\n");
-           
         choix = scanfD("\n1- MODE MANAGER\n2- MODE FESTIVALIER\n3- RETOUR AU MENU\n4- QUITTER LE PROGRAMME\n\n", 1);
         
         switch(choix){
@@ -1085,6 +1084,6 @@ int main(){
     
     free(salles);
     free(concerts);
-    
+	    
     return 0;
 }
