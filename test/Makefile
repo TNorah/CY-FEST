@@ -1,5 +1,5 @@
 #première cible : sera executée en premier
-#faedfhagzyduaz
+
 all: exec clean
 
 main2.o : main2.c *.h
