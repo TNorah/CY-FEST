@@ -14,8 +14,9 @@ typedef struct{
     
     int réservé;
     int capacité;
+    int prix;
     char catégorie;
-    
+
 }Siège;
 
 typedef struct{
@@ -57,15 +58,15 @@ typedef struct{
 }Salle;
 
 void vide_buffer();
-int scanfD(char *message, int nbRecup);
+int scanfD(int nbRecup);
 void scanfS(char *texte);
 long conversionDateSecondesD(Concert *concert, int indice);
 long conversionDateSecondesF(Concert *concert, int indice);
 int testSiFichierVide(FILE *fichier);
 void ecrireSalle(Salle *tabS, int Nbs);
 void ecrireConcert(Concert *tabC, int Nbc);
-Concert *lireConcert(int *nbC);
-Salle *lireSalle(int *nbS);
+Concert *lireConcert(int *nbC, int affiche);
+Salle *lireSalle(int *nbS, int affiche);
 int rechercheSalle(Salle *salle, char *Nom, int nbTotal);
 int rechercheConcert(Concert *concert, char *Nom, int nbTotal);
 void afficheSalle(Salle *salle, int nb);
@@ -77,6 +78,3 @@ Concert *modifierConcert(Concert *concert, int nbC);
 Salle* modeManager(Salle *salle, Concert *concert, int *nbS, int *nbC);
 Salle* réserverSalle(Salle *salle, int indiceS, int nbSalles);
 Salle* modeFestivalier(Salle *salle, Concert *concert, int *nbS, int *nbC);
-
-
-
