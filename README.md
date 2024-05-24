@@ -12,7 +12,7 @@ Nous allons maintenant expliquer le fonctionnement global du programme. Tout d'a
 ## Comment faire pour que le programme compile et qu'il  s'exécute ?
 
 Il faut tout d'abord entrez dans le terminal puis il faut ecrire "make" appuyer sur "Entrez" une fois cette action exécuté plusieurs options vous seront offerte 
-il vous suffira d'écrire "gcc -c main2.c -o main2.o" puis "./exec" pour pouvoir éxecuter le programme;
+il vous suffira d'écrire "gcc -c main2.c -o main2.o" puis "./exec" pour pouvoir éxecuter le programme. (pas finis...).
 
 
 ### Le mode manager
