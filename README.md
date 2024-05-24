@@ -9,6 +9,12 @@ Ce pojet permet aussi aux participants de reserver leur place pour chaque concer
 
 Nous allons maintenant expliquer le fonctionnement global du programme. Tout d'abord, il est demandé de faire un choix parmi 4 propositions. Vous pouvez en effet accéder au mode manager si vous le souhaitez gérer les différentes scènes ou vous pouvez décider d'accéder au mode festivalier qui permet de réserver sa place, vous pouvez également retourner au menu et mettre fin au programme. Il suffit de taper le numéro associé à l'action que vous souhaitez réaliser pour pouvoir accéder aux différents modes évidemment tout sera afficher. En cas de mauvaise commande le choix vous sera redemandé.
 
+## Comment faire pour que le programme compile et qu'il  s'exécute ?
+
+Il faut tout d'abord entrez dans le terminal puis il faut ecrire "make" appuyer sur "Entrez" une fois cette action exécuté plusieurs options vous seront offerte 
+il vous suffira d'écrire "gcc -c main2.c -o main2.o" puis "./exec" pour pouvoir éxecuter le programme;
+
+
 ### Le mode manager
 
 Si vous décidez d'accéder au mode manager, vous pourrez décider de créer une salle, attribuée un concert à une salle, modifier une salle ou encore modifier un concert. Il est bien sûr possible de retourner au menu.
@@ -38,10 +44,6 @@ En tant que festivalier, vous devrez tout d'abord choisir dans quelle salle vous
 **Les differentes bibliothèques utilisées:** stdio.h, string.h, stdlib.h, time.h;
 
 **Référence pour les couleurs:** http://sdz.tdct.org/sdz/des-couleurs-dans-la-console-linux.html
-## Demo
-
-Voici un exemple de ce qu'il vous sera affiché lorsque vous voudrez réserver une place.
-
 
 
 ## Référence pour les couleurs
