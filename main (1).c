@@ -302,14 +302,14 @@ Salle *lireSalle(int *nbS){
     return salle;
 }
 
-int RatioSiège(Salle *salle){
+int RatioSiège(Salle *salle, int indice){
 	int r;
 	int i;
 	int j;
 	int s=0;
 	int n;
 
-	n = salle.rangées[].sièges[].réservé;
+	n = salle[i].rangées[].sièges[].réservé;
 	
 	for(i=0; i<n; i++){
 		for(j=0; j<n; j++){
