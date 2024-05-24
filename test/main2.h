@@ -4,6 +4,10 @@
 #include <time.h>
 
 #define couleur(param) printf("\033[%sm",param)
+
+#define NB_SALLES 9
+#define NB_RANGEES 9
+#define NB_SIEGES 9
 #define MAX 30
 
 #define FICHIER_SALLES "salles.txt"
@@ -78,3 +82,4 @@ Concert *modifierConcert(Concert *concert, int nbC);
 Salle* modeManager(Salle *salle, Concert *concert, int *nbS, int *nbC);
 Salle* réserverSalle(Salle *salle, int indiceS, int nbSalles);
 Salle* modeFestivalier(Salle *salle, Concert *concert, int *nbS, int *nbC);
+
