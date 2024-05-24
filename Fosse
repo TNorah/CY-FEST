@@ -19,8 +19,8 @@ do{
 
 if(n==1){
   for(int l=0; l<(tab[i].rangées[j].nbSièges); l++){
-    if(tab[i].rangées[j].sièges[].catégorie == 'A'){
-      tab[i].rangées[j].sièges[].capacité = 2;
+    if(tab[i].rangées[j].sièges[l].catégorie == 'A'){
+      tab[i].rangées[j].sièges[l].capacité = 2;
     }
   }
 }else{
@@ -28,7 +28,7 @@ if(n==1){
 }
 
 
-tab[i].rangées[j].sièges[].catégorie[] = "FOSSE";
+tab[i].rangées[j].sièges[l].catégorie[] = "FOSSE";
 
 // Dans la fonction creerSalle
 
