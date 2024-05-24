@@ -16,9 +16,7 @@ int main(){
     couleur("0");
     
     salles = lireSalle(&nbSalles, 0);
-    //printf("nbSalles = %d",nbSalles);
     concerts = lireConcert(&nbConcerts, 0);
-    //printf("nbConcerts = %d",nbConcerts);
     
     do{
         couleur("33");
@@ -31,7 +29,6 @@ int main(){
         switch(choix){
             case 1:
                 salles = modeManager(salles,concerts,&nbSalles,&nbConcerts);
-                //printf("nbSalles = %d\n",nbSalles);
                 break;
             case 2:
                 salles = modeFestivalier(salles,concerts,&nbSalles,&nbConcerts);
