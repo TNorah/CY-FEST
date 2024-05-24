@@ -9,12 +9,11 @@ int main(){
     int nbSalles = 0;
     int nbConcerts = 0;
     
+    couleur("5;36");
     printf("-------------\n");
     printf("|| CY-FEST ||\n");
     printf("-------------\n");
-
-    //int ch = getchar();
-    //putchar(ch);
+    couleur("0");
     
     salles = lireSalle(&nbSalles, 0);
     //printf("nbSalles = %d",nbSalles);
@@ -22,7 +21,9 @@ int main(){
     //printf("nbConcerts = %d",nbConcerts);
     
     do{
-        printf("\n--MENU--\n");
+        couleur("33");
+        printf("|| MENU ||\n");
+        couleur("0");
 
         printf("\n1- MODE MANAGER\n2- MODE FESTIVALIER\n3- RETOUR AU MENU\n4- QUITTER LE PROGRAMME\n\n");
         choix = scanfD(1);
