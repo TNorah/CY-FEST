@@ -302,6 +302,29 @@ Salle *lireSalle(int *nbS){
     return salle;
 }
 
+int RatioSiège(Salle *salle){
+	int r;
+	int i;
+	int j=0;
+	int s=0;
+	int n;
+
+	n = salle.rangées.sièges.réservé
+	
+	for(i=0; i<n; i++){
+		for(j=0; j<n; j++){
+			if(salle.rangées[i].sièges[j].réservé == 1){
+					s +=1;
+			}
+	
+		}
+	}
+	
+	r = s/n;
+	
+	return r;
+}
+
 int rechercheSalle(Salle *salle, char *Nom, int nbTotal){ 
     
     // recherche dans le tableau de salles si une salle existe
@@ -675,6 +698,7 @@ Salle* modifierSalle(Salle *tab, Concert *c, int N, int nC){
     
     int indiceS;
     int indiceC;
+    int ratio;
     
     int rA, rB;
     int rC;
@@ -788,6 +812,9 @@ Salle* modifierSalle(Salle *tab, Concert *c, int N, int nC){
     
     ecrireSalle(tab, N);
     printf("|| Modification de la salle fini ! ||\n\n");
+
+    ratio = RatioSiège(tab);
+    printf("Le ratio de place réservés est de %d", ratio);
     
     return tab;
 }
