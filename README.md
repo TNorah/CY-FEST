@@ -48,9 +48,9 @@ Voici un exemple de ce qu'il vous sera affiché lorsque vous voudrez réserver u
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Cyan | ![#68bfaa.](https://via.placeholder.com/10/68bfaa?text=+) #68bfaa |
-|  Jaune | ![#ffff00](https://via.placeholder.com/10/#ffff00?text=+) #ffff00 |
-| Magenta | ![#ff00ff](https://via.placeholder.com/10/ff00ff?text=+) #ff00ff  |
+| Vert | ![#68bfaa.](https://via.placeholder.com/10/68bfaa?text=+) #68bfaa 32|
+|  Jaune | ![#ffff00](https://via.placeholder.com/10/ffff00?text=+) #ffff00 33|
+| Magenta | ![#ff00ff](https://via.placeholder.com/10/ff00ff?text=+) #ff00ff  35|
 
 
 ## Auteurs
