@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+Salle* modifierSalle(Salle *tab, Concert *c, int N, int nC){
+
+  int IndiceS;
+  int indiceC;
+  int rA,rB;
+  int rC;
+  int i;
+  int j;
+
+// dans la fonction modifierSalle
+
+do{
+
+  printf("Veuillez taper 1 si vous souhaitez ajoutez une fosse et 0 si vous ne souhaitez pas ajouter une fosse");
+  verif = scanf("%d", &n);
+}while(n != 0 || n!=1 || verif !=1);
+
+if(n==1){
+  for(int l=0; l<(tab[i].rangées[j].nbSièges); l++){
+    if(tab[i].rangées[j].sièges[l].catégorie == 'A'){
+      tab[i].rangées[j].sièges[l].capacité = 2;
+    }
+  }
+}else{
+  printf("vous ne souhaitez pas ajouter de fosse");
+}
+
+
+tab[i].rangées[j].sièges[l].catégorie[] = "FOSSE";
+
+// Dans la fonction creerSalle
+
+int nb = ; // nombre de personnes par rangée a definir
+int nbPersonne;
+
+do{
+printf("Pouvez-vous entrez le nombre de personnes maximum pouvant etre dans la fosse");
+scanf("%d", &nbPersonne);
+}while(nbPersonne<0); // peut etre ajouter une limite de personne povant etre dans la fosse
+
+rA =nbPersonne/nb;
+  
+
+return salles
+}
+
+
+
+
+
