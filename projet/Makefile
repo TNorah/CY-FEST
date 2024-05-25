@@ -1,5 +1,3 @@
-#première cible : sera executée en premier
-
 all: exec clean
 
 main2.o : main2.c *.h
