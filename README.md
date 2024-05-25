@@ -7,7 +7,7 @@ Ce projet permet aussi aux participants de réserver leur place pour chaque conc
 
 ## Comment faire pour que le programme compile et qu'il s'exécute ?
 
-Veillez d'abord à mettre le dossier "projet" dans un répertoire que vous pouvez accéder depuis votre terminal. Ensuite, il faut dans votre terminal et dans le bon répertoire contenant le dossier, écrire "make" et appuyer sur "Entrez" une fois cette action exécuté tous les fichiers devrez être compilés et prêt à être éxecuter, ainsi il vous suffira d'écrire "./exec" pour pouvoir éxecuter le programme. (pas finis...).
+Veuillez d'abord à mettre le dossier "projet" dans un répertoire que vous pouvez accéder depuis votre terminal. Ensuite, il faut dans votre terminal et dans le bon répertoire contenant le dossier, écrire "make" et appuyer sur "Entrez" une fois cette action exécuté tous les fichiers devrez être compilés et prêt à être éxecuter, ainsi il vous suffira d'écrire "./exec" pour pouvoir éxecuter le programme. (pas finis...).
 
 ## Comment ça fonctionne ?
 
