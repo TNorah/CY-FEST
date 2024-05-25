@@ -2,16 +2,16 @@
 
 Une brève description du projet 
 
-Ce projet consiste en un programme permettant à des organisateurs de festival de pouvoir attribuer des concerts à des salles, créer différentes catégorie et attribuer un nombre de rangées par catégorie et un nombre de sièges par rangées en fonction de ce que desir l'organisateur,attribuer des prix à chaque catégorie il peut aussi ajouter une fosse.
-Ce pojet permet aussi aux participants de reserver leur place pour chaque concerts.
+Ce projet consiste en un programme permettant à des organisateurs de festival de pouvoir attribuer des concerts à des salles, créer différentes catégorie et attribuer un nombre de rangées par catégorie et un nombre de sièges par rangées en fonction de ce que desir l'organisateur, attribuer des prix à chaque catégorie il peut aussi ajouter une fosse.
+Ce projet permet aussi aux participants de réserver leur place pour chaque concert.
+
+## Comment faire pour que le programme compile et qu'il s'exécute ?
+
+Veillez d'abord à mettre le dossier "projet" dans un répertoire que vous pouvez accéder depuis votre terminal. Ensuite, il faut dans votre terminal et dans le bon répertoire contenant le dossier, écrire "make" et appuyer sur "Entrez" une fois cette action exécuté tous les fichiers devrez être compilés et prêt à être éxecuter, ainsi il vous suffira d'écrire "./exec" pour pouvoir éxecuter le programme. (pas finis...).
 
 ## Comment ça fonctionne ?
 
-Nous allons maintenant expliquer le fonctionnement global du programme. Tout d'abord, il est demandé de faire un choix parmi 4 propositions. Vous pouvez en effet accéder au mode manager si vous le souhaitez gérer les différentes scènes ou vous pouvez décider d'accéder au mode festivalier qui permet de réserver sa place, vous pouvez également retourner au menu et mettre fin au programme. Il suffit de taper le numéro associé à l'action que vous souhaitez réaliser pour pouvoir accéder aux différents modes évidemment tout sera afficher. En cas de mauvaise commande le choix vous sera redemandé.
-
-## Comment faire pour que le programme compile et qu'il  s'exécute ?
-
-Veillez d'abord à mettre le dossier "projet" dans un répertoire que vous pouvez accéder depuis votre terminal. Ensuite, il faut dans votre terminal et dans le bon répertoire contenant le dossier, écrire "make" et appuyer sur "Entrez" une fois cette action exécuté tous les fichiers devrez être compilés et prêt à être éxecuter, ainsi il vous suffira d'écrire "./exec" pour pouvoir éxecuter le programme. (pas finis...).
+Nous allons maintenant expliquer le fonctionnement global du programme. Tout d'abord, il est demandé de faire un choix parmi 4 propositions. Vous pouvez en effet accéder au mode manager si vous le souhaitez gérer les différentes scènes ou vous pouvez décider d'accéder au mode festivalier qui permet de voir les différentes salles disponibles et réserver sa place, vous pouvez également retourner au menu et mettre fin au programme. Il suffit de taper le numéro associé à l'action que vous souhaitez réaliser pour pouvoir accéder aux différents modes évidemment tout sera afficher. En cas de mauvaise commande, le choix vous sera redemandé.
 
 ### Le mode manager
 
@@ -25,14 +25,11 @@ Si vous souhaitez modifier une salle, vous pourrez le faire uniquement avant ou 
 
 Si vous souhaitez attribuer un concert à une salle, vous pourrez attribuer un concert à une salle qui n'est pas déjà prise.
 
-Il vous sera aussi possible en tant que manager de choisir les prix des places en fonction de leur catégorie. Mais aussi d'observer le ratio entre nombre de sièges occupé et le nombre de sièges total.
+Il vous sera aussi possible en tant que manager de choisir les prix des places en fonction de leur catégorie.
 
 ### Le mode festivalier
 
 En tant que festivalier, vous devrez tout d'abord choisir dans quelle salle vous souhaitez réserver. Il sera bien évidemment impossible de réserver si une salle est déjà complète. Ensuite, il vous sera possible de réserver la place de votre choix avant le début du concert. Les différentes places déjà réservées, leur catégorie et leur prix vous seront affichées.
-
-
-
 
 
 ## Ce que l'on a utilisé
@@ -60,8 +57,6 @@ En tant que festivalier, vous devrez tout d'abord choisir dans quelle salle vous
 - abalemarca@cy-tech.fr
 
 - touminorah@cy-tech.fr
-
-
 
 
 
