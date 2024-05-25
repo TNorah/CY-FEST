@@ -11,9 +11,7 @@ Nous allons maintenant expliquer le fonctionnement global du programme. Tout d'a
 
 ## Comment faire pour que le programme compile et qu'il  s'exécute ?
 
-Il faut tout d'abord entrez dans le terminal puis il faut ecrire "make" appuyer sur "Entrez" une fois cette action exécuté plusieurs options vous seront offerte 
-il vous suffira d'écrire "gcc -c main2.c -o main2.o" puis "./exec" pour pouvoir éxecuter le programme. (pas finis...).
-
+Veillez d'abord à mettre le dossier "projet" dans un répertoire que vous pouvez accéder depuis votre terminal. Ensuite, il faut dans votre terminal et dans le bon répertoire contenant le dossier, écrire "make" et appuyer sur "Entrez" une fois cette action exécuté tous les fichiers devrez être compilés et prêt à être éxecuter, ainsi il vous suffira d'écrire "./exec" pour pouvoir éxecuter le programme. (pas finis...).
 
 ### Le mode manager
 
@@ -37,7 +35,7 @@ En tant que festivalier, vous devrez tout d'abord choisir dans quelle salle vous
 
 
 
-## Ce que l'on a utlisé
+## Ce que l'on a utilisé
 
 **Langage de programmation:** Langage C
 
