@@ -863,9 +863,8 @@ Salle* modifierSalle(Salle *tab, Concert *c, int N, int nC){ // modifie une sall
     for(int i=0; i<N; i++){
         printf("Salle n.%d : %s\n",i+1,tab[i].nom);
     }
-    
+
     // récupérer le nom pour vérifier et prendre l'indice de la salle
-    
     printf("Quelle salle voulez-vous modifier ?\n");
     do{
         verif = scanf("%[^\n]s", textS);
@@ -891,12 +890,12 @@ Salle* modifierSalle(Salle *tab, Concert *c, int N, int nC){ // modifie une sall
         long DebutC = conversionDateSecondesD(c, indiceC);
         long FinC = conversionDateSecondesF(c, indiceC);
 
-        if (DateActuelle > FinC) {
-            printf("Tu peux modifier salle!\n");
-        }
-        else {
-            printf("Tu peux pas modifier salle!\n");
+        
+        if(DateActuelle <= FinC || c[indiceC].état == 1){
+            printf("Tu peux pas modifier salle !\n");
             return tab;
+        }else if (DateActuelle > FinC){
+            printf("Tu peux modifier salle !\n");
         }
     }
     
@@ -1009,18 +1008,18 @@ Salle *attribuerConcert(Salle *salles, int nbs, Concert *concerts, int nbc){ // 
 	salles = lireSalle(&nbs, 1);
 	concerts = lireConcert(&nbc, 1);
 
-    	if(salles == NULL || concerts == NULL){
-        	printf("ERREUR : il n'y a pas de salles et/ou de concerts !\n");
-        	exit(EXIT_FAILURE);
-    	}
+    if(salles == NULL || concerts == NULL){
+        printf("ERREUR : il n'y a pas de salles et/ou de concerts !\n");
+        exit(EXIT_FAILURE);
+    }
 
 	printf("quel salle attribue ?\n");
-    	do{
-        	verif = scanf("%[^\n]s", s);
-        	vide_buffer();
+    do{
+        verif = scanf("%[^\n]s", s);
+        vide_buffer();
 
-    	}while(verif != 1);
-    	scanfS(s);
+    }while(verif != 1);
+    scanfS(s);
 	
 	int indiceS = rechercheSalle(salles,s,nbs);
 	
@@ -1035,12 +1034,12 @@ Salle *attribuerConcert(Salle *salles, int nbs, Concert *concerts, int nbc){ // 
 	}
 	
 	printf("quel concert attribue ?\n");
-    	do {
-        	verif = scanf("%[^\n]s", c);
-        	vide_buffer();
+    do{
+        verif = scanf("%[^\n]s", c);
+        vide_buffer();
 
-    	}while (verif != 1);
-    	scanfS(c);
+    }while (verif != 1);
+    scanfS(c);
 	
 	int indiceC = rechercheConcert(concerts,c,nbc);
 	
@@ -1050,9 +1049,9 @@ Salle *attribuerConcert(Salle *salles, int nbs, Concert *concerts, int nbc){ // 
 	}
 	
 	if(concerts[indiceC].état == 1){
-		printf("Cet concert est deja prise !\n");
+		printf("Cet concert est deja prise\n");
 		return salles;
-	}
+    }
 	
 	//printf("%s\n",concerts[indiceC].nom);
 	//printf("%s\n",concerts[indiceC].artiste);
@@ -1287,26 +1286,27 @@ Salle* réserverSalle(Salle *salle, int indiceS, int nbSalles){ // fonction qui 
             }
         }
         printf("\n");
-        printf("\n-- Legende --\n");
-        printf("O ");
-        printf(": siege libre\n");
-        couleur("31");
-        printf("X ");
-        couleur("0");
-        printf(": siege occupé\n");
-        couleur("32");
-        printf("O ");
-        couleur("0");
-        printf(": Categorie A -> %d\n",prixA);
-        couleur("33");
-        printf("O ");
-        couleur("0");
-        printf(": Categorie B -> %d\n",prixB);
-        couleur("35");
-        printf("O ");
-        couleur("0");
-        printf(": Categorie C -> %d\n",prixC);
     }
+    printf("\n");
+    printf("\n-- Legende --\n");
+    printf("O ");
+    printf(": siege libre\n");
+    couleur("31");
+    printf("X ");
+    couleur("0");
+    printf(": siege occupé\n");
+    couleur("32");
+    printf("O ");
+    couleur("0");
+    printf(": Categorie A -> %d\n", prixA);
+    couleur("33");
+    printf("O ");
+    couleur("0");
+    printf(": Categorie B -> %d\n", prixB);
+    couleur("35");
+    printf("O ");
+    couleur("0");
+    printf(": Categorie C -> %d\n", prixC);
 
     do{
     	printf("Donnez l'emplacement que vous voulez réservé : (ex : 1,3)\n");
