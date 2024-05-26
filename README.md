@@ -18,6 +18,7 @@ Nous allons maintenant expliquer le fonctionnement global du programme. Tout d'a
 Si vous décidez d'accéder au mode manager, vous pourrez décider de créer une salle, attribuée un concert à une salle, modifier une salle ou encore modifier un concert. Il est bien sûr possible de retourner au menu.
 
 Si vous le souhaitez, vous pouvez créer une salle à partir de rien en choisissant le nom de la salle, son nombre de rangées, son nombre de rangées par catégorie.
+A noter : vous ne pouvez pas créer plus de 9 salles aussi le nombre de rangées et de sièges sont aussi limités au nombre de 9.
 
 Si vous souhaitez modifier un concert, il faudra bien évidemment le faire avant le début de celui-ci ou attendre la fin du concert. Il vous sera demandé quel concert vous souhaitez modifier, si vous voulez ajouter une fosse et il sera possible de changer la date du concert.
 
