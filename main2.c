@@ -17,12 +17,13 @@ int main(){
     
     salles = lireSalle(&nbSalles, 0);
     concerts = lireConcert(&nbConcerts, 0);
-    
-    do{
+
+    do{ //cette boucle sert à de jamais arrêter le programme jusqu'à ce que l'utilisateur le fasse par lui-même
         couleur("33");
         printf("|| MENU ||\n");
         couleur("0");
 
+	//Differents choix sont proposés à l'utilisateur
         printf("\n1- MODE MANAGER\n2- MODE FESTIVALIER\n3- RETOUR AU MENU\n4- QUITTER LE PROGRAMME\n\n");
         choix = scanfD(1);
         
@@ -44,7 +45,8 @@ int main(){
                 break;
         }
     }while(choix != 4);  
-    
+
+    //Libére l'allocation dynamique pour les salles et les concerts car elles ne sont plus utiles
     free(salles);
     free(concerts);
 	    
